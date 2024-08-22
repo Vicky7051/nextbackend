@@ -12,6 +12,7 @@ export class authorizationMiddleware implements NestMiddleware {
     async use(req: any, res: Response, next: (error?: Error | any) => void) {
         try{
             const token = req.cookies.authToken
+            console.log("Token =>", token)
             if(!token) throw new UnauthorizedException("Unauthorized access.")
             const payload = await JWT.verify(token, process.env.SECRET_KEY)
             const isUser = await this.userService.findOne(payload.userId)
