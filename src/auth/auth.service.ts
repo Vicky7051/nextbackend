@@ -28,13 +28,17 @@ export class AuthService {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, 
       secure: true,   
-      sameSite: 'none' 
+      sameSite: 'none',
+      domain: 'https://nextfrontend-1dnu.onrender.com',
+      path: '/',
     });
     res.cookie('role', isUser.role, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
       secure: true,   
-      sameSite: 'none' 
+      sameSite: 'none',
+      domain: 'https://nextfrontend-1dnu.onrender.com',
+      path: '/',
     })
 
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
@@ -55,7 +59,9 @@ export class AuthService {
     res.clearCookie('authToken', {
       httpOnly : true,
       secure: true,   
-      sameSite: 'none' 
+      sameSite: 'none',
+      domain: 'https://nextfrontend-1dnu.onrender.com',
+      path: '/',
     })
 
     res.status(200).json({
