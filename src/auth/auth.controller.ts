@@ -12,7 +12,7 @@ export class AuthController {
   ) {}
 
   @Post('login')
-  async loginUser(@Body() createAuthDto : CreateAuthDto,@Res() res : Response) : Promise<any> {
+  async loginUser(@Body() createAuthDto : CreateAuthDto,@Res({passthrough : true}) res : Response) : Promise<any> {
     return this.authService.loginUser(createAuthDto, res)
   }
 
