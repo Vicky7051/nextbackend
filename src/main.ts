@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const options = {
-    origin: 'https://nextfrontend-1dnu.onrender.com',  // Replace with your actual frontend domain
+    origin: true,  // Replace with your actual frontend domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     credentials: true,
