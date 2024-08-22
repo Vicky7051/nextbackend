@@ -23,15 +23,18 @@ export class AuthService {
     }
     const token = JWT.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
 
-    // Set token in cookies
+
     res.cookie('authToken', token, {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
-      // secure: process.env.NODE_ENV === 'production', // Only use `secure` in production
+      maxAge: 24 * 60 * 60 * 1000, 
+      secure: true,   
+      sameSite: 'none' 
     });
     res.cookie('role', isUser.role, {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: true,   
+      sameSite: 'none' 
     })
 
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
@@ -49,7 +52,11 @@ export class AuthService {
   }
 
   async logoutUser (res : Response){
-    res.clearCookie('authToken', {httpOnly : true})
+    res.clearCookie('authToken', {
+      httpOnly : true,
+      secure: true,   
+      sameSite: 'none' 
+    })
 
     res.status(200).json({
       status : true,

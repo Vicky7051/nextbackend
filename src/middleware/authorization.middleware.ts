@@ -22,10 +22,14 @@ export class authorizationMiddleware implements NestMiddleware {
         }
         catch(err){
             res.clearCookie('authToken', {
-                httpOnly: true
+                httpOnly: true,
+                secure: true,   
+                sameSite: 'none' 
               });
               res.clearCookie('role', {
-                httpOnly: true
+                httpOnly: true,
+                secure: true,   
+                sameSite: 'none' 
               })
             return res.status(400).json({
                 statusCode: 400,
