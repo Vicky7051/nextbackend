@@ -23,22 +23,17 @@ export class AuthService {
     }
     const token = JWT.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
 
-
     res.cookie('authToken', token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, 
-      secure: true,   
-      sameSite: 'none',
-      domain: 'https://nextfrontend-1dnu.onrender.com',
-      path: '/',
+      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+      secure: process.env.NODE_ENV === 'production', // Ensures cookies are sent over HTTPS only in production
+      maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
+      sameSite: 'lax', // CSRF protection
     });
     res.cookie('role', isUser.role, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      secure: true,   
-      sameSite: 'none',
-      domain: 'https://nextfrontend-1dnu.onrender.com',
-      path: '/',
+      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+      secure: process.env.NODE_ENV === 'production', // Ensures cookies are sent over HTTPS only in production
+      maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
+      sameSite: 'lax', // CSRF protection
     })
 
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
@@ -57,11 +52,9 @@ export class AuthService {
 
   async logoutUser (res : Response){
     res.clearCookie('authToken', {
-      httpOnly : true,
-      secure: true,   
-      sameSite: 'none',
-      domain: 'https://nextfrontend-1dnu.onrender.com',
-      path: '/',
+      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+      secure: process.env.NODE_ENV === 'production', // Ensures cookies are sent over HTTPS only in production
+      sameSite: 'lax', // CSRF protection
     })
 
     res.status(200).json({
