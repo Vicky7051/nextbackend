@@ -23,19 +23,22 @@ export class AuthService {
     }
     const token = JWT.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
 
-    res.cookie('authToken', token, {
-      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-      secure: true, // Ensures cookies are sent over HTTPS only in production
-      maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
-      sameSite: 'none', // CSRF protection
-    });
-    res.cookie('role', isUser.role, {
-      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-      secure: true, // Ensures cookies are sent over HTTPS only in production
-      maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
-      sameSite: 'none', // CSRF protection
-    })
-
+    // res.cookie('authToken', token, {
+    //   httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+    //   secure: true, // Ensures cookies are sent over HTTPS only in production
+    //   maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
+    //   sameSite: 'none', // CSRF protection
+    // });
+    // res.cookie('role', isUser.role, {
+    //   httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+    //   secure: true, // Ensures cookies are sent over HTTPS only in production
+    //   maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
+    //   sameSite: 'none', // CSRF protection
+    // })
+    res.setHeader('Set-Cookie', [
+      `authToken=${token}; HttpOnly; Secure; Max-Age=86400; SameSite=Lax`,
+      `role=${isUser.role}; HttpOnly; Secure; Max-Age=86400; SameSite=Lax`
+    ]);
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
   }
 
