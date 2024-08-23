@@ -28,7 +28,7 @@ export class AuthService {
       secure: true, // Ensures cookies are sent over HTTPS only in production
       maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
       sameSite: 'none', // CSRF protection
-      domain : 'nextfrontend-1dnu.onrender.com',
+      domain : 'onrender.com',
       path : '/'
     });
     res.cookie('role', isUser.role, {
@@ -36,7 +36,7 @@ export class AuthService {
       secure: true, // Ensures cookies are sent over HTTPS only in production
       maxAge: 24 * 60 * 60 * 1000, // Cookie expiration (1 day in milliseconds)
       sameSite: 'none', // CSRF protection
-      domain : 'nextfrontend-1dnu.onrender.com',
+      domain : 'onrender.com',
       path : '/'
     })
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
