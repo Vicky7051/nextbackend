@@ -28,16 +28,12 @@ export class AuthService {
       secure: true, 
       maxAge: 24 * 60 * 60 * 1000,
       sameSite: 'none', 
-      domain : 'nextbackend-0gw6.onrender.com',
-      path : '/'
     });
     res.cookie('role', isUser.role, {
       httpOnly: true, 
       secure: true,
       maxAge: 24 * 60 * 60 * 1000,
       sameSite: 'none',
-      domain : 'nextbackend-0gw6.onrender.com',
-      path : '/'
     })
     res.status(200).json({status : true, message : "Login successfilly", user : isUser, token})
   }
@@ -55,9 +51,14 @@ export class AuthService {
 
   async logoutUser (res : Response){
     res.clearCookie('authToken', {
-      httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-      secure: process.env.NODE_ENV === 'production', // Ensures cookies are sent over HTTPS only in production
-      sameSite: 'none', // CSRF protection
+      httpOnly: true, 
+      secure: true,
+      sameSite: 'none', 
+    })
+    res.clearCookie('role', {
+      httpOnly: true, 
+      secure: true,
+      sameSite: 'none', 
     })
 
     res.status(200).json({
