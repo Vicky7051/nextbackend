@@ -49,7 +49,7 @@ export class AuthService {
     })
   }
 
-  async logoutUser (res : Response){
+  async logoutUser (res : Response){      
     res.clearCookie('authToken', {
       httpOnly: true, 
       secure: true,

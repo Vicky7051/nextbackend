@@ -110,7 +110,6 @@ export class SalaryapprovalController {
     if(role == ADMIN || role == MANAGER){
       updateSalaryapprovalDto.isRejected = true
       try{
-        console.log(updateSalaryapprovalDto)
         const data =  await this.salaryapprovalService.reject(id, updateSalaryapprovalDto)
         return res.status(200).json({
           status : true, 
